@@ -409,8 +409,8 @@
       detail: ["Built and ran the technical roadmap, prioritised by product and business impact", "Fast MVPs for business-critical features", "Core Web Vitals: detailed performance analysis and targeted fixes", "Mentored juniors through remote mob programming", "React, Node, TypeScript, Apollo GraphQL, Redux, Jest, Cypress, Docker"] },
     { from: "2022-01", to: "2025-12", org: "Dailymotion", role: "Engineering Manager", sec: 10, scene: "criticalpath", ship: [.88, "Video and ads that survive outages"],
       title: "Video and ads keep playing when the API is down",
-      cap: "As engineering manager I took the team through the loading sequence, so ads display earlier: about 9% more display ads. We removed the API and the in-memory database from the critical path, so video and ads still play during an outage. We also blocked unwanted bots on the API, which saved a lot of money.",
-      detail: ["Managed 6 developers: frontend, fullstack and backend", "Reworked the loading sequence so ads display earlier: about 9% more display ads shown", "API and in-memory database off the critical path: video and ads survive outages", "Bot protection on the API: major cost savings", "Started the Frontend Chapter, a meetup across teams"] },
+      cap: "As engineering manager I took the team through the loading sequence, so ads display earlier: about 9% more display ads. We removed the API and the in-memory database from the critical path, so video and ads still play during an outage. We also blocked unwanted bots on the API, saving about eight thousand euros a month.",
+      detail: ["Managed 6 developers: frontend, fullstack and backend", "Reworked the loading sequence so ads display earlier: about 9% more display ads shown", "API and in-memory database off the critical path: video and ads survive outages", "Bot protection on the API: about €8k a month saved", "Started the Frontend Chapter, a meetup across teams"] },
     { from: "2026-01", to: null, org: "Dailymotion", role: "Senior Engineering Manager", sec: 16, scene: "senior", ship: [.2, "A new dailymotion.com", .56], cues: [0, .12, .3, .56, .66, .73, .8, .9],
       title: "A new website and a new team",
       cap: "This year I became senior engineering manager. We rebuilt the whole website in a few months, frontend and backend. Now I'm leading the work to take the backend from 600 milliseconds to 60 at P75, ten times faster, by cutting out inefficient calls. I hired a new frontend team around three principles. Deliver, above everything. Be proactive. And one team: find the solution and help each other. Like a sports team, we're all in it together.",
@@ -427,7 +427,7 @@
     { ch: 3, at: .8, h: .45, label: "12 outages a year down to 2" },
     { ch: 4, at: .7, h: .8, label: "Mob programming: shipping MVPs fast" },
     { ch: 5, at: .45, h: .95, label: "API off the critical path" },
-    { ch: 5, at: .78, h: .75, label: "Bots blocked, API costs down" },
+    { ch: 5, at: .78, h: .75, label: "Bots blocked, ~€8k a month saved" },
     { ch: 6, at: .45, h: 1, label: "Backend 600 → 60 ms, in progress" },
     { ch: 6, at: .82, h: .9, label: "The new team and its principles" },
   ];
@@ -664,7 +664,7 @@
           ctx.globalAlpha = b * (t < .7 ? 1 : 1 - (t - .7) / .3);
           box(x, y, s * 1.6, s, "#555"); text("BOT", x + s * .8, y + s * .75, cond(s * .7, 700), K.white, "center");
         }
-        ctx.globalAlpha = b; text("BOTS BLOCKED", wx + 20, y0 + H * .09, cond(H * .04, 800), K.white); text("API COSTS DOWN", wx + 20, y0 + H * .14, cond(H * .04, 800), K.yellow); ctx.globalAlpha = 1;
+        ctx.globalAlpha = b; text("BOTS BLOCKED", wx + 20, y0 + H * .09, cond(H * .04, 800), K.white); text("~€8K A MONTH SAVED", wx + 20, y0 + H * .14, cond(H * .04, 800), K.yellow); ctx.globalAlpha = 1;
       }
     },
 
