@@ -341,7 +341,7 @@
 
   <section class="lede">
     <div>
-      <p>I run three teams at Dailymotion: ten developers across the website, the apps backend and the video player. This year we rebuilt the website, frontend and backend, in a few months, and took backend response times from 600 ms to 60 ms at P75. I still get into the code when production needs it.</p>
+      <p>I run three teams at Dailymotion: ten developers across the website, the apps backend and the video player. This year we rebuilt the website, frontend and backend, in a few months, and I'm now leading the work to bring backend response times from 600 ms down to 60 ms at P75. I still get into the code when production needs it.</p>
       <p>I set the vision and the plan with our product leads, split the work so everyone owns something that matters, and make sure we're always on the most business-critical thing first. Get it to prod as soon as you can. If it works, iterate.</p>
     </div>
     <ol class="principles" aria-label="How my teams work">
@@ -413,8 +413,8 @@
       detail: ["Managed 6 developers: frontend, fullstack and backend", "Took apart the loading sequence: tracking, whiteboarding, group programming", "API and in-memory database off the critical path: video and ads survive outages", "Bot protection on the API: major cost savings", "Started the Frontend Chapter, a meetup across teams"] },
     { from: "2026-01", to: null, org: "Dailymotion", role: "Senior Engineering Manager", sec: 16, scene: "senior", ship: [.2, "A new dailymotion.com", .56], cues: [0, .12, .3, .56, .66, .73, .8, .9],
       title: "A new website and a new team",
-      cap: "This year I became senior engineering manager. We rebuilt the whole website in a few months, frontend and backend. The backend went from 600 milliseconds to 60 at P75, ten times faster, by cutting out inefficient calls. I hired a new frontend team around three principles. Deliver, above everything. Be proactive. And one team: find the solution and help each other. Like a sports team, we're all in it together.",
-      detail: ["Rebuilt dailymotion.com, frontend and backend, in a few months", "Backend response time at P75 down from 600 ms to 60 ms by removing inefficient calls", "Hired a new frontend team around three principles: deliver, be proactive, one team", "10 developers: website (3 frontend, 2 backend), apps backend (2), player (3)", "Vision and plan set with product leads; work split so people own it", "React, TypeScript, Apollo, Python, Go, Preact"] },
+      cap: "This year I became senior engineering manager. We rebuilt the whole website in a few months, frontend and backend. Now I'm leading the work to take the backend from 600 milliseconds to 60 at P75, ten times faster, by cutting out inefficient calls. I hired a new frontend team around three principles. Deliver, above everything. Be proactive. And one team: find the solution and help each other. Like a sports team, we're all in it together.",
+      detail: ["Rebuilt dailymotion.com, frontend and backend, in a few months", "Leading the work to cut backend response time at P75 from 600 ms to 60 ms (in progress)", "Hired a new frontend team around three principles: deliver, be proactive, one team", "10 developers: website (3 frontend, 2 backend), apps backend (2), player (3)", "Vision and plan set with product leads; work split so people own it", "React, TypeScript, Apollo, Python, Go, Preact"] },
   ];
   const OUTRO = 2.5;
   let acc = 0;
@@ -428,7 +428,7 @@
     { ch: 4, at: .7, h: .8, label: "Mob programming: shipping MVPs fast" },
     { ch: 5, at: .45, h: .95, label: "API off the critical path" },
     { ch: 5, at: .78, h: .75, label: "Bots blocked, API costs down" },
-    { ch: 6, at: .45, h: 1, label: "Backend 600 → 60 ms" },
+    { ch: 6, at: .45, h: 1, label: "Backend 600 → 60 ms, in progress" },
     { ch: 6, at: .82, h: .9, label: "The new team and its principles" },
   ];
   const WEIGHT = [.1, .12, .1, .22, .3, .55, .62];
@@ -695,21 +695,21 @@
           if (wipe > 0 && wipe < w) box(x + wipe - 3, y, 6, h, K.yellow);
           return;
         }
-        // Beat 2: backend response time at P75, 600 ms down to 60 ms.
+        // Beat 2: backend response time at P75, 600 ms today, 60 ms the target (in progress).
         const q2 = (p - .3) / .26, x = W * .44, w = W * .52, drop = span(q2, .25, .7), ms = Math.round(lerp(600, 60, drop));
         const slide = span(q2, 0, .15);
         ctx.globalAlpha = slide;
-        box(x, H * .07, w, H * .065, K.yellow); text("BACKEND RESPONSE TIME · P75", x + 12, H * .118, cond(H * .045, 800), K.bg);
-        text(String(ms), x + w, H * .44, cond(H * .3), drop >= 1 ? K.green : K.yellow, "right");
+        box(x, H * .07, w, H * .065, K.yellow); text("BACKEND P75 · WORK IN PROGRESS", x + 12, H * .118, cond(H * .045, 800), K.bg);
+        text(String(ms), x + w, H * .44, cond(H * .3), K.yellow, "right");
         text("MS", x + w, H * .5, cond(H * .055, 800), K.white, "right");
         const bw = w * .58, bx = x, by = H * .22;
-        text("BEFORE", bx, by + H * .045, cond(H * .04, 700), K.grey); box(bx, by + H * .06, bw, H * .06, K.red); text("600 MS", bx + 10, by + H * .105, cond(H * .045, 800), K.white);
-        text("AFTER", bx, by + H * .2, cond(H * .04, 700), K.grey); box(bx, by + H * .215, Math.max(bw * ms / 600, 4), H * .06, drop >= 1 ? K.green : K.yellow);
+        text("TODAY", bx, by + H * .045, cond(H * .04, 700), K.grey); box(bx, by + H * .06, bw, H * .06, K.red); text("600 MS", bx + 10, by + H * .105, cond(H * .045, 800), K.white);
+        text("TARGET", bx, by + H * .2, cond(H * .04, 700), K.grey); box(bx, by + H * .215, Math.max(bw * ms / 600, 4), H * .06, K.yellow);
         text(`${ms} MS`, bx + Math.max(bw * ms / 600, 4) + 10, by + H * .26, cond(H * .045, 800), K.white);
         const stamp = span(q2, .72, .82);
         if (stamp > 0) {
           ctx.globalAlpha = stamp; ctx.save(); ctx.translate(x + w * .3, H * .66); ctx.rotate(-.06);
-          box(-W * .13 * stamp, -H * .05, W * .26 * stamp, H * .1, K.green); text("10× FASTER", 0, H * .032, cond(H * .07), K.white, "center");
+          box(-W * .16 * stamp, -H * .05, W * .32 * stamp, H * .1, K.yellow); text("TARGET: 10× FASTER", 0, H * .032, cond(H * .065), K.bg, "center");
           ctx.restore();
         }
         ctx.globalAlpha = 1;
