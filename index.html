@@ -254,11 +254,11 @@
     <div class="poster" id="poster">
       <div class="scorebug" aria-hidden="true"><b>SO</b><span>Dailymotion</span><i>Live</i></div>
       <div>
-        <h2 class="big">12 years.<br>Highlights in <em>56 seconds.</em></h2>
+        <h2 class="big">12 years.<br>Highlights in <em id="secs">50 seconds.</em></h2>
         <p>Banking, then Paris, then eight years at Dailymotion: frontend developer, tech lead, engineering manager, and now senior engineering manager.</p>
       </div>
       <button class="playbtn" id="bigplay" aria-label="Play the highlights"></button>
-      <div class="len">Play · 0:56</div>
+      <div class="len" id="len">Play</div>
     </div>
 
     <div class="endcard" id="endcard" aria-hidden="true">
@@ -341,7 +341,7 @@
 
   <section class="lede">
     <div>
-      <p>I run three teams at Dailymotion: ten developers across the website, the apps backend and the video player. This year we rebuilt the website, frontend and backend, in about three months, and I'm now leading the work to bring backend response times from 600 ms down to 60 ms at P75. I still get into the code when production needs it.</p>
+      <p>I run three teams at Dailymotion: ten developers across the website, the apps backend and the video player. This year we rebuilt the website, frontend and backend, in about three months. I still get into the code when production needs it.</p>
       <p>I set the vision and the plan with our product leads, split the work so everyone owns something that matters, and make sure we're always on the most business-critical thing first. Get it to prod as soon as you can. If it works, iterate.</p>
     </div>
     <ol class="principles" aria-label="How my teams work">
@@ -386,6 +386,8 @@
   // ------------------------------------------------------------ chapters
   // sec is screen time: the recent, relevant roles get the most. The
   // timeline is split the same way, so they get the most room there too.
+  // The backend 600 → 60 ms P75 work isn't confirmed yet: switch this on once it is.
+  const LATENCY = false;
   const CHAPTERS = [
     { from: "2014-03", to: "2015-10", org: "JP Morgan, Glasgow", role: "Software Developer", sec: 4, scene: "ticker", ship: [.7, "Trade booking, automated"],
       title: "Booking trades automatically",
@@ -411,15 +413,20 @@
       title: "Video and ads keep playing when the API is down",
       cap: "As engineering manager I took the team through the loading sequence, so ads display earlier: about 9% more display ads. We removed the API and the in-memory database from the critical path, so video and ads still play during an outage. We also blocked unwanted bots on the API, saving about eight thousand euros a month.",
       detail: ["Managed 6 developers: frontend, fullstack and backend", "Reworked the loading sequence so ads display earlier: about 9% more display ads shown", "API and in-memory database off the critical path: video and ads survive outages", "Bot protection on the API: about €8k a month saved", "Started the Frontend Chapter, a meetup across teams"] },
-    { from: "2026-01", to: null, org: "Dailymotion", role: "Senior Engineering Manager", sec: 16, scene: "senior", ship: [.2, "A new dailymotion.com", .56], cues: [0, .12, .3, .56, .66, .73, .8, .9],
+    { from: "2026-01", to: null, org: "Dailymotion", role: "Senior Engineering Manager", sec: LATENCY ? 16 : 13, scene: "senior",
+      ship: [.2, "A new dailymotion.com", LATENCY ? .56 : .4], cues: LATENCY ? [0, .12, .3, .56, .66, .73, .8, .9] : [0, .14, .4, .52, .62, .72, .86],
       title: "A new website and a new team",
-      cap: "This year I became senior engineering manager. We rebuilt the whole website in about three months, frontend and backend. Now I'm leading the work to take the backend from 600 milliseconds to 60 at P75, ten times faster, by cutting out inefficient calls. I hired a new frontend team around three principles. Deliver, above everything. Be proactive. And one team: find the solution and help each other. Like a sports team, we're all in it together.",
-      detail: ["Rebuilt dailymotion.com, frontend and backend, in about three months", "Leading the work to cut backend response time at P75 from 600 ms to 60 ms (in progress)", "Hired a new frontend team around three principles: deliver, be proactive, one team", "10 developers: website (3 frontend, 2 backend), apps backend (2), player (3)", "Vision and plan set with product leads; work split so people own it", "React, TypeScript, Apollo, Python, Go, Preact"] },
+      cap: "This year I became senior engineering manager. We rebuilt the whole website in about three months, frontend and backend. " +
+        (LATENCY ? "Now I'm leading the work to take the backend from 600 milliseconds to 60 at P75, ten times faster, by cutting out inefficient calls. " : "") +
+        "I hired a new frontend team around three principles. Deliver, above everything. Be proactive. And one team: find the solution and help each other. Like a sports team, we're all in it together.",
+      detail: ["Rebuilt dailymotion.com, frontend and backend, in about three months", ...(LATENCY ? ["Leading the work to cut backend response time at P75 from 600 ms to 60 ms (in progress)"] : []), "Hired a new frontend team around three principles: deliver, be proactive, one team", "10 developers: website (3 frontend, 2 backend), apps backend (2), player (3)", "Vision and plan set with product leads; work split so people own it", "React, TypeScript, Apollo, Python, Go, Preact"] },
   ];
   const OUTRO = 2.5;
   let acc = 0;
   CHAPTERS.forEach(c => { c.t0 = acc; acc += c.sec; c.t1 = acc; c.lines = c.cap.match(/[^.!?]+[.!?]+/g) || [c.cap]; });
   const PLAYTIME = acc, DURATION = acc + OUTRO;
+  document.getElementById("secs").textContent = `${Math.round(DURATION)} seconds.`;
+  document.getElementById("len").textContent = `Play · 0:${String(Math.round(DURATION)).padStart(2, "0")}`;
 
   // Attention peaks: the moments worth jumping to. The management years
   // carry the most weight, and their key moments peak highest.
@@ -428,7 +435,7 @@
     { ch: 4, at: .7, h: .8, label: "Mob programming: shipping MVPs fast" },
     { ch: 5, at: .45, h: .95, label: "API off the critical path" },
     { ch: 5, at: .78, h: .75, label: "Bots blocked, ~€8k a month saved" },
-    { ch: 6, at: .45, h: 1, label: "Backend 600 → 60 ms, in progress" },
+    ...(LATENCY ? [{ ch: 6, at: .45, h: 1, label: "Backend 600 → 60 ms, in progress" }] : []),
     { ch: 6, at: .82, h: .9, label: "The new team and its principles" },
   ];
   const WEIGHT = [.1, .12, .1, .22, .3, .55, .62];
@@ -670,15 +677,16 @@
 
     senior(p, clock) {
       ground();
-      if (p < .56) {
+      const siteEnd = LATENCY ? .56 : .4, beat1 = LATENCY ? .3 : .4;
+      if (p < siteEnd) {
         // Left: the rebuild progress, which stays up through both beats.
-        const q1 = clamp(p / .3);
+        const q1 = clamp(p / beat1);
         [["FRONTEND", span(q1, .25, .65)], ["BACKEND", span(q1, .45, .9)]].forEach(([l, v], i) => {
           const bx = W * .04, by = H * .42 + i * H * .08;
           text(l, bx, by + H * .045, cond(H * .045, 700), K.white); box(bx + W * .11, by + H * .012, W * .2, H * .04, K.dim); box(bx + W * .11, by + H * .012, W * .2 * v, H * .04, v >= 1 ? K.green : K.yellow);
           if (v >= 1) text("REBUILT", bx + W * .32, by + H * .045, cond(H * .04, 800), K.green);
         });
-        if (p < .3) {
+        if (p < beat1) {
           // Beat 1: the old page, with the new one wiping across it.
           const x = W * .5, y = H * .1, w = W * .44, h = H * .58, r = rnd(5);
           box(x, y, w, h, "#1d1d1d");
@@ -716,7 +724,7 @@
         return;
       }
       // The new team on a pitch: everyone passing, nobody playing alone.
-      const q = (p - .56) / .44, x = W * .47, y = H * .08, w = W * .5, h = H * .6;
+      const q = (p - siteEnd) / (1 - siteEnd), x = W * .47, y = H * .08, w = W * .5, h = H * .6;
       box(x, y, w, h, K.pitch);
       for (let i = 1; i < 6; i += 2) box(x + i * w / 6, y, w / 6, h, K.pitch2);
       ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = 2;
