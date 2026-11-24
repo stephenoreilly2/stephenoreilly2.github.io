@@ -114,12 +114,29 @@
   .tip small { color: var(--grey); font-size: 12px; }
   .timeline:hover .tip { opacity: 1; }
   /* Attention graph: where people watch most, as on any video site. */
-  .heat { position: absolute; left: 0; width: 100%; bottom: 14px; height: 42px; pointer-events: none; opacity: .0; transition: opacity .2s; }
-  .heat path { fill: rgba(255, 255, 255, .3); }
-  .heat .lit { fill: rgba(255, 210, 0, .55); }
-  .timeline:hover .heat, .player.started:not(.playing) .heat { opacity: 1; }
-  .player.started:not(.playing) .captions, .player:has(.timeline:hover) .captions { bottom: 112px; }
-  .captions { transition: bottom .2s; }
+  .heat { position: absolute; left: 0; width: 100%; bottom: 13px; height: 46px; pointer-events: none; opacity: 0; transition: opacity .25s; overflow: visible; }
+  .heat path { transform-box: fill-box; transform-origin: 50% 100%; }
+  .heat #heatline { fill: none; stroke: rgba(255, 255, 255, .7); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+  .heat .lit { fill: rgba(255, 210, 0, .75); }
+  .player.started .heat { opacity: .5; }
+  .player.started .timeline:hover .heat, .player.started:not(.playing) .heat { opacity: 1; }
+  .player.started .heat.reveal path { animation: rise .9s cubic-bezier(.2, .8, .2, 1) both; }
+  @keyframes rise { from { transform: scaleY(0); } }
+  /* Peak pins: the most-watched moments, sitting on top of the graph. */
+  .pins { position: absolute; left: 0; right: 0; bottom: 13px; height: 46px; pointer-events: none; opacity: 0; transition: opacity .25s; }
+  .player.started .pins { opacity: .6; }
+  .player.started .timeline:hover .pins, .player.started:not(.playing) .pins { opacity: 1; }
+  .pin { position: absolute; transform: translate(-50%, -100%); pointer-events: auto; cursor: pointer; border: 0; padding: 0; background: none; display: grid; justify-items: center; }
+  .pin i { font: 800 12px/1 var(--cond); font-style: normal; background: var(--yellow); color: var(--ink); width: 18px; height: 18px; display: grid; place-items: center; }
+  .pin::after { content: ""; width: 0; height: 0; border: 5px solid transparent; border-top-color: var(--yellow); }
+  .pin span { position: absolute; bottom: 30px; white-space: nowrap; background: var(--yellow); color: var(--ink); font: 800 13px/1 var(--cond); text-transform: uppercase; padding: 5px 7px; opacity: 0; transform: translateY(4px); transition: .15s; pointer-events: none; }
+  .pin:hover span, .pin:focus-visible span { opacity: 1; transform: none; }
+  .pin:hover i { background: #fff; }
+  .pin.hit i { animation: hit 1.2s ease-out; }
+  @keyframes hit { 0% { box-shadow: 0 0 0 0 rgba(255, 210, 0, .9); transform: scale(1.35); } 100% { box-shadow: 0 0 0 14px rgba(255, 210, 0, 0); transform: none; } }
+  /* Get the captions out of the way while someone is reading the graph. */
+  .player.started:not(.playing) .captions, .player:has(.timeline:hover) .captions { opacity: 0; }
+  .captions { transition: opacity .2s; }
   .tip .peak { display: block; margin-top: 3px; font: 700 12px/1 var(--cond); text-transform: uppercase; letter-spacing: .04em; color: var(--ink); background: var(--yellow); padding: 3px 5px; }
   .row { display: flex; align-items: center; gap: 2px; margin-top: 2px; }
   .row .grow { flex: 1; }
@@ -152,11 +169,26 @@
   .keys dd { margin: 0; color: #cfcac0; }
 
   /* ---------- CV below ---------- */
-  .peaks { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 14px 0 0; }
-  .peaks span { font: 700 15px/1 var(--cond); text-transform: uppercase; letter-spacing: .05em; color: var(--grey); margin-right: 4px; }
-  .peaks button { border: 2px solid var(--ink); background: #fff; padding: 7px 11px; cursor: pointer; font: 700 14px/1 var(--sans); }
-  .peaks button::before { content: "▲ "; font-size: 10px; color: var(--grey); }
-  .peaks button:hover { background: var(--yellow); }
+  .reel { padding: 22px 0 4px; }
+  .reel header { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 12px; }
+  .reel h2 { margin: 0; font: 800 30px/1 var(--cond); text-transform: uppercase; }
+  .reel h2 b { background: var(--yellow); padding: 0 .2em; }
+  .reel header span { color: var(--grey); font-weight: 600; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .card { text-align: left; background: #fff; border: 2px solid var(--ink); padding: 0; cursor: pointer; display: flex; flex-direction: column; transition: transform .15s, box-shadow .15s; }
+  .card:hover { transform: translate(-3px, -3px); box-shadow: 6px 6px 0 var(--ink); }
+  .card .th { position: relative; aspect-ratio: 16 / 9; background: #121212; overflow: hidden; border-bottom: 2px solid var(--ink); }
+  .card canvas { width: 100%; height: 100%; display: block; }
+  .card .rank { position: absolute; left: 0; top: 0; background: var(--yellow); font: 800 18px/1 var(--cond); padding: 5px 8px; }
+  .card .at { position: absolute; right: 6px; bottom: 6px; background: rgba(0, 0, 0, .85); color: #fff; font: 700 13px/1 var(--cond); padding: 3px 5px; }
+  .card .play { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transition: opacity .15s; background: rgba(0, 0, 0, .35); }
+  .card .play::before { content: ""; border-left: 22px solid var(--yellow); border-top: 14px solid transparent; border-bottom: 14px solid transparent; }
+  .card:hover .play { opacity: 1; }
+  .card .body { padding: 10px 12px 12px; display: grid; gap: 6px; }
+  .card b { font: 800 19px/1.05 var(--cond); text-transform: uppercase; }
+  .card small { color: var(--grey); font-size: 13px; font-weight: 600; }
+  .meter { height: 6px; background: var(--rule); }
+  .meter i { display: block; height: 100%; background: var(--ink); }
   .lede { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; padding: 36px 0 12px; border-bottom: 2px solid var(--ink); }
   @media (max-width: 860px) { .lede { grid-template-columns: 1fr; gap: 20px; } }
   .lede p { margin: 0 0 1em; font-size: 19px; }
@@ -276,7 +308,15 @@
 
     <div class="controls" id="controls">
       <div class="timeline" id="timeline" role="slider" tabindex="0" aria-label="Career timeline" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <svg class="heat" id="heat" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true"><path id="heatpath"/><path id="heatlit" class="lit"/></svg>
+        <svg class="heat" id="heat" viewBox="0 0 1000 44" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity=".04"/></linearGradient>
+            <linearGradient id="hgp" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd200" stop-opacity=".8"/><stop offset="1" stop-color="#ffd200" stop-opacity=".08"/></linearGradient>
+            <clipPath id="hclip"><rect id="hplayed" x="0" y="-10" width="0" height="60"/></clipPath>
+          </defs>
+          <path id="heatpath" fill="url(#hg)"/><path id="heatplayed" fill="url(#hgp)" clip-path="url(#hclip)"/><path id="heatlit" class="lit"/><path id="heatline"/>
+        </svg>
+        <div class="pins" id="pins"></div>
         <div class="knob" id="knob"></div>
         <div class="tip" id="tip"></div>
       </div>
@@ -294,7 +334,10 @@
     </div>
   </div>
 
-  <div class="peaks" id="peaks"><span>Short on time? The most-watched moments:</span></div>
+  <section class="reel" aria-labelledby="reelh">
+    <header><h2 id="reelh"><b>Most watched</b></h2><span>Short on time? Start with these.</span></header>
+    <div class="cards" id="cards"></div>
+  </section>
 
   <section class="lede">
     <div>
@@ -395,11 +438,14 @@
     for (const pk of PEAKS) v = Math.max(v, pk.h * Math.exp(-((t - pk.t) ** 2) / (2 * 1.1 ** 2)));
     return v;
   }
-  function heatPath(from = 0, to = PLAYTIME) {
-    const n = 240, pts = [];
-    for (let i = 0; i <= n; i++) { const t = from + (to - from) * i / n; pts.push([t / PLAYTIME * 1000, 40 - attention(t) * 38]); }
-    return `M${pts[0][0]},40 L` + pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" L") + ` L${pts.at(-1)[0]},40 Z`;
+  function heatPoints(from, to) {
+    const n = Math.max(8, Math.round((to - from) / PLAYTIME * 300)), pts = [];
+    for (let i = 0; i <= n; i++) { const t = from + (to - from) * i / n; pts.push([t / PLAYTIME * 1000, 44 - attention(t) * 40]); }
+    return pts;
   }
+  const line = pts => pts.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`).join("");
+  function heatPath(from = 0, to = PLAYTIME) { const pts = heatPoints(from, to); return `M${pts[0][0]},44 L` + line(pts).slice(1) + `L${pts.at(-1)[0]},44Z`; }
+  const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
   const ym = s => { const [y, m] = s.split("-").map(Number); return y * 12 + m - 1; };
   const today = new Date(), NOW = today.getFullYear() * 12 + today.getMonth();
   CHAPTERS.forEach(c => { c.a = ym(c.from); c.b = c.to ? ym(c.to) + 1 : NOW + 1; });
@@ -407,7 +453,8 @@
   const fmt = m => MONTHS[m % 12] + " " + Math.floor(m / 12);
 
   const $ = id => document.getElementById(id);
-  const player = $("player"), canvas = $("stage"), ctx = canvas.getContext("2d"), timeline = $("timeline");
+  const player = $("player"), canvas = $("stage"), timeline = $("timeline");
+  let ctx = canvas.getContext("2d");
   const state = { t: 0, playing: false, started: false, ended: false, speed: 1, quality: "1080", captions: true, narrate: false, chaos: false, chapter: -1, line: -1 };
 
   CHAPTERS.forEach(c => {
@@ -753,6 +800,9 @@
     $("time").innerHTML = `${state.ended ? "Now" : fmt(monthAt(t))} <span>/ ${fmt(NOW)}</span>`;
     timeline.setAttribute("aria-valuenow", Math.round(t / PLAYTIME * 100));
     timeline.setAttribute("aria-valuetext", `${fmt(monthAt(t))}, ${c.role}`);
+    $("hplayed").setAttribute("width", t / PLAYTIME * 1000);
+    for (const pk of TOP) if (state.playing && !pk.passed && t >= pk.t) { pk.passed = true; pk.pin.classList.remove("hit"); void pk.pin.offsetWidth; pk.pin.classList.add("hit"); }
+    if (t < 1) TOP.forEach(pk => pk.passed = false);
   }
 
   let last = performance.now(), clock = 0;
@@ -775,7 +825,7 @@
 
   // ------------------------------------------------------------ controls
   const PLAY = '<path d="M8 5v14l11-7z"/>', PAUSE = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
-  function start() { if (state.started) return; state.started = true; player.classList.add("started"); $("poster").classList.add("gone"); }
+  function start() { if (state.started) return; state.started = true; player.classList.add("started"); $("poster").classList.add("gone"); $("heat").classList.add("reveal"); }
   function hideEnd() { state.ended = false; $("endcard").classList.remove("on"); $("endcard").setAttribute("aria-hidden", "true"); }
   function play() {
     if (state.ended) { hideEnd(); state.t = 0; state.chapter = -1; }
@@ -854,13 +904,54 @@
     if (dragging) seek(t);
   });
   timeline.addEventListener("pointerleave", () => { CHAPTERS.forEach(x => x.seg.querySelector(".hov").style.width = 0); $("heatlit").setAttribute("d", ""); });
-  $("heatpath").setAttribute("d", heatPath());
-  // The management peaks, as buttons under the player.
-  PEAKS.filter(pk => pk.h >= .75).forEach(pk => {
-    const b = document.createElement("button"); b.type = "button"; b.textContent = pk.label;
-    b.onclick = () => { seek(pk.t - 1); play(); player.scrollIntoView({ behavior: "smooth", block: "center" }); };
-    $("peaks").appendChild(b);
+  // The graph, and the top peaks as numbered pins on it (ranked by height).
+  const whole = heatPath();
+  $("heatpath").setAttribute("d", whole); $("heatplayed").setAttribute("d", whole);
+  $("heatline").setAttribute("d", line(heatPoints(0, PLAYTIME)));
+  const TOP = PEAKS.filter(pk => pk.h >= .75);
+  [...TOP].sort((a, b) => b.h - a.h).forEach((pk, i) => pk.rank = i + 1);
+  const jump = pk => { seek(pk.t - 1.2); play(); };
+  TOP.forEach(pk => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "pin"; b.setAttribute("aria-label", `Most watched: ${pk.label}`);
+    b.innerHTML = `<span>▲ ${pk.label}</span><i>${pk.rank}</i>`;
+    b.addEventListener("pointerdown", e => e.stopPropagation());
+    b.onclick = e => { e.stopPropagation(); jump(pk); };
+    pk.pin = b; $("pins").appendChild(b);
   });
+  function placePins() {
+    const tr = timeline.getBoundingClientRect();
+    TOP.forEach(pk => {
+      const c = CHAPTERS[pk.ch], r = c.seg.getBoundingClientRect();
+      pk.pin.style.left = (r.left - tr.left + r.width * pk.at) + "px";
+      pk.pin.style.top = (46 - attention(pk.t) * 42) + "px";
+    });
+  }
+  new ResizeObserver(placePins).observe(timeline);
+
+  // Highlight cards under the player, each with a frame from its moment.
+  function snapshot(pk) {
+    const c = document.createElement("canvas"), w = 480, h = 270, saved = [ctx, W, H, DPR];
+    c.width = w; c.height = h; ctx = c.getContext("2d"); W = w; H = h; DPR = 1;
+    const ch = CHAPTERS[pk.ch], p = Math.min(.97, pk.at + .1);
+    SCENES[ch.scene](p, 2.6);
+    if (ch.ship && p >= ch.ship[0] && p < (ch.ship[2] ?? 1)) delivered(ch.ship[1], 1);
+    [ctx, W, H, DPR] = saved;
+    return c;
+  }
+  function buildReel() {
+    $("cards").innerHTML = "";
+    [...TOP].sort((a, b) => a.rank - b.rank).forEach(pk => {
+      const ch = CHAPTERS[pk.ch], b = document.createElement("button");
+      b.type = "button"; b.className = "card";
+      b.innerHTML = `<div class="th"><span class="rank">#${pk.rank}</span><span class="at">${mmss(pk.t)}</span><span class="play"></span></div>
+        <div class="body"><b>${pk.label}</b><small>${ch.role} · ${ch.from.slice(0, 4)}–${ch.to ? ch.to.slice(0, 4) : "now"}</small><div class="meter" title="Attention"><i style="width:${pk.h * 100}%"></i></div></div>`;
+      b.querySelector(".th").prepend(snapshot(pk));
+      b.onclick = () => { jump(pk); player.scrollIntoView({ behavior: "smooth", block: "center" }); };
+      $("cards").appendChild(b);
+    });
+  }
+  (document.fonts?.ready ?? Promise.resolve()).then(buildReel);
   timeline.addEventListener("pointerdown", e => { dragging = true; timeline.setPointerCapture(e.pointerId); seek(timeFromX(e.clientX)); });
   timeline.addEventListener("pointerup", () => { dragging = false; play(); });
 
