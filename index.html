@@ -222,11 +222,11 @@
     <div class="poster" id="poster">
       <div class="scorebug" aria-hidden="true"><b>SO</b><span>Dailymotion</span><i>Live</i></div>
       <div>
-        <h2 class="big">12 years.<br>Highlights in <em>52 seconds.</em></h2>
+        <h2 class="big">12 years.<br>Highlights in <em>56 seconds.</em></h2>
         <p>Banking, then Paris, then eight years at Dailymotion: frontend developer, tech lead, engineering manager, and now senior engineering manager.</p>
       </div>
       <button class="playbtn" id="bigplay" aria-label="Play the highlights"></button>
-      <div class="len">Play · 0:52</div>
+      <div class="len">Play · 0:56</div>
     </div>
 
     <div class="endcard" id="endcard" aria-hidden="true">
@@ -344,33 +344,33 @@
   // sec is screen time: the recent, relevant roles get the most. The
   // timeline is split the same way, so they get the most room there too.
   const CHAPTERS = [
-    { from: "2014-03", to: "2015-10", org: "JP Morgan, Glasgow", role: "Software Developer", sec: 4, scene: "ticker",
+    { from: "2014-03", to: "2015-10", org: "JP Morgan, Glasgow", role: "Software Developer", sec: 4, scene: "ticker", ship: [.7, "Trade booking, automated"],
       title: "Booking trades automatically",
       cap: "I started at JP Morgan in Glasgow, automating trade booking in Smalltalk, and on call when market reporting broke.",
       detail: ["Automated trade booking from traders' and project managers' requirements", "On call for market reporting: escalations and production hotfixes", "Smalltalk"] },
-    { from: "2015-11", to: "2018-04", org: "Skillsoft, Paris", role: "Web Developer", sec: 4.5, scene: "rebuild",
+    { from: "2015-11", to: "2018-04", org: "Skillsoft, Paris", role: "Web Developer", sec: 4.5, scene: "rebuild", ship: [.75, "A new React app, from scratch"],
       title: "From Rails to React",
       cap: "Then Paris. I kept a legacy Rails app running while we rebuilt it in React from scratch.",
       detail: ["Maintained and extended a legacy Ruby on Rails application", "Built the new React application from scratch: core architecture and features", "Features for Elixir microservices"] },
     { from: "2018-05", to: "2018-09", org: "Mention, Paris", role: "Frontend Developer", sec: 3.5, scene: "graph",
-      title: "Mocking the backend",
-      cap: "At Mention I mocked the GraphQL backend so frontend work didn't have to wait for it.",
+      title: "Delivering without waiting for the backend",
+      cap: "At Mention I mocked the GraphQL backend, so we could deliver the frontend without waiting for it.", ship: [.72, "Frontend features, on time"],
       detail: ["Product features in React, Relay Modern, Flow and Redux", "Mocked backend responses in GraphQL", "Developer-experience tooling"] },
-    { from: "2018-10", to: "2019-09", org: "Dailymotion, Paris", role: "Frontend Developer", sec: 6, scene: "outages",
+    { from: "2018-10", to: "2019-09", org: "Dailymotion, Paris", role: "Frontend Developer", sec: 6, scene: "outages", ship: [.82, "Ads and legal projects, on deadline"],
       title: "12 outages a year down to 2",
       cap: "I joined Dailymotion. We had roughly one outage a month. I added automated tests on the critical paths and it dropped to one every six months.",
       detail: ["Advertising and legal projects on tight deadlines", "Prettier and ESLint on pre-commit and pre-push hooks", "Automated critical-path tests: outages from about 1 a month to 1 every 6 months"] },
-    { from: "2019-10", to: "2021-12", org: "Dailymotion, Paris", role: "Senior Frontend / Tech Lead", sec: 7, scene: "vitals",
-      title: "Owning the tech roadmap",
-      cap: "As tech lead I owned the technical roadmap. I worked on Core Web Vitals and brought junior developers on through mob programming, all remote.",
+    { from: "2019-10", to: "2021-12", org: "Dailymotion, Paris", role: "Senior Frontend / Tech Lead", sec: 9, scene: "vitals",
+      title: "Delivering as a mob",
+      cap: "As tech lead I owned the technical roadmap and got Core Web Vitals into the green. To ship business-critical MVPs fast, we worked as a mob: four people, one keyboard, all remote. It's also how our junior developers levelled up.", cues: [0, .4, .7], ship: [.86, "Business-critical MVPs, fast"],
       detail: ["Built and ran the technical roadmap, prioritised by product and business impact", "Fast MVPs for business-critical features", "Core Web Vitals: detailed performance analysis and targeted fixes", "Mentored juniors through remote mob programming", "React, Node, TypeScript, Apollo GraphQL, Redux, Jest, Cypress, Docker"] },
-    { from: "2022-01", to: "2025-12", org: "Dailymotion", role: "Engineering Manager", sec: 10, scene: "criticalpath",
+    { from: "2022-01", to: "2025-12", org: "Dailymotion", role: "Engineering Manager", sec: 10, scene: "criticalpath", ship: [.88, "Video and ads that survive outages"],
       title: "Video and ads keep playing when the API is down",
       cap: "As engineering manager I took the team through the loading sequence. We removed the API and the in-memory database from the critical path, so video and ads still play during an outage. We also blocked unwanted bots on the API, which saved a lot of money.",
       detail: ["Managed 6 developers: frontend, fullstack and backend", "Took apart the loading sequence: tracking, whiteboarding, group programming", "API and in-memory database off the critical path: video and ads survive outages", "Bot protection on the API: major cost savings", "Started the Frontend Chapter, a meetup across teams"] },
-    { from: "2026-01", to: null, org: "Dailymotion", role: "Senior Engineering Manager", sec: 14, scene: "senior",
+    { from: "2026-01", to: null, org: "Dailymotion", role: "Senior Engineering Manager", sec: 16, scene: "senior", ship: [.2, "A new dailymotion.com", .56], cues: [0, .12, .3, .56, .66, .73, .8, .9],
       title: "A new website and a new team",
-      cap: "This year I became senior engineering manager. We rebuilt the whole website in a few months, frontend and backend. Cutting out inefficient calls took the backend from 600 milliseconds to 60 at P75. I hired a new frontend team around three principles. Deliver, above everything. Be proactive. And one team: find the solution and help each other. Like a sports team, we're all in it together.",
+      cap: "This year I became senior engineering manager. We rebuilt the whole website in a few months, frontend and backend. The backend went from 600 milliseconds to 60 at P75, ten times faster, by cutting out inefficient calls. I hired a new frontend team around three principles. Deliver, above everything. Be proactive. And one team: find the solution and help each other. Like a sports team, we're all in it together.",
       detail: ["Rebuilt dailymotion.com, frontend and backend, in a few months", "Backend response time at P75 down from 600 ms to 60 ms by removing inefficient calls", "Hired a new frontend team around three principles: deliver, be proactive, one team", "10 developers: website (3 frontend, 2 backend), apps backend (2), player (3)", "Vision and plan set with product leads; work split so people own it", "React, TypeScript, Apollo, Python, Go, Preact"] },
   ];
   const OUTRO = 2.5;
@@ -382,11 +382,11 @@
   // carry the most weight, and their key moments peak highest.
   const PEAKS = [
     { ch: 3, at: .8, h: .45, label: "12 outages a year down to 2" },
-    { ch: 4, at: .7, h: .4, label: "Mob programming" },
+    { ch: 4, at: .7, h: .8, label: "Mob programming: shipping MVPs fast" },
     { ch: 5, at: .45, h: .95, label: "API off the critical path" },
     { ch: 5, at: .78, h: .75, label: "Bots blocked, API costs down" },
-    { ch: 6, at: .42, h: 1, label: "Website rebuilt, 600 → 60 ms" },
-    { ch: 6, at: .75, h: .9, label: "The new team and its principles" },
+    { ch: 6, at: .45, h: 1, label: "Backend 600 → 60 ms" },
+    { ch: 6, at: .82, h: .9, label: "The new team and its principles" },
   ];
   const WEIGHT = [.1, .12, .1, .22, .3, .55, .62];
   PEAKS.forEach(pk => pk.t = CHAPTERS[pk.ch].t0 + pk.at * CHAPTERS[pk.ch].sec);
@@ -493,9 +493,9 @@
 
     graph(p, clock) {
       ground();
-      const cx = W * .72, cy = H * .44, labels = ["FEED", "ALERTS", "SEARCH", "REPORTS", "INBOX", "TEAM"], appear = span(p, 0, .3);
+      const cx = W * .72, cy = H * .37, labels = ["FEED", "ALERTS", "SEARCH", "REPORTS", "INBOX", "TEAM"], appear = span(p, 0, .3);
       labels.forEach((l, i) => {
-        const a = i / labels.length * Math.PI * 2 - Math.PI / 2, x = cx + Math.cos(a) * W * .17, y = cy + Math.sin(a) * H * .28;
+        const a = i / labels.length * Math.PI * 2 - Math.PI / 2, x = cx + Math.cos(a) * W * .17, y = cy + Math.sin(a) * H * .25;
         ctx.globalAlpha = appear; ctx.strokeStyle = "#444"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(x, y); ctx.stroke();
         const t = (clock * .9 + i / 6) % 1, out = t > .5, tt = out ? (t - .5) * 2 : t * 2;
         box((out ? lerp(cx, x, tt) : lerp(x, cx, tt)) - 4, (out ? lerp(cy, y, tt) : lerp(y, cy, tt)) - 4, 8, 8, out ? K.yellow : K.white);
@@ -505,7 +505,7 @@
       });
       box(cx - W * .07, cy - H * .06, W * .14, H * .12, span(p, .2, .5) > .5 ? K.yellow : K.dim);
       text("MOCK API", cx, cy + H * .018, cond(H * .05), K.bg, "center");
-      ctx.globalAlpha = span(p, .55, .75); text("REAL BACKEND: NOT NEEDED YET", cx, H * .88, cond(H * .035, 700), K.grey, "center"); ctx.globalAlpha = 1;
+      ctx.globalAlpha = span(p, .55, .75); text("REAL BACKEND: NOT NEEDED YET", cx, H * .7, cond(H * .035, 700), K.grey, "center"); ctx.globalAlpha = 1;
     },
 
     outages(p) {
@@ -534,26 +534,56 @@
 
     vitals(p, clock) {
       ground();
-      const names = ["LCP", "FID", "CLS"], cy = H * .38, r = Math.min(W * .055, H * .12);
-      names.forEach((n, i) => {
-        const cx = W * .6 + i * W * .14, v = lerp(.15 + i * .05, .88, span(p, .15 + i * .08, .55 + i * .08));
-        ctx.lineWidth = r * .28;
-        [[0, .4, K.red], [.4, .7, "#f29a1f"], [.7, 1, K.green]].forEach(([a, b, col]) => {
-          ctx.strokeStyle = col; ctx.globalAlpha = .3; ctx.beginPath(); ctx.arc(cx, cy, r, Math.PI + a * Math.PI, Math.PI + b * Math.PI - .04); ctx.stroke();
+      if (p < .4) {
+        // Beat 1: Core Web Vitals into the green.
+        const q = p / .4, names = ["LCP", "FID", "CLS"], cy = H * .42, r = Math.min(W * .06, H * .13);
+        names.forEach((n, i) => {
+          const cx = W * .58 + i * W * .15, v = lerp(.15 + i * .05, .88, span(q, .1 + i * .1, .6 + i * .1));
+          ctx.lineWidth = r * .28;
+          [[0, .4, K.red], [.4, .7, "#f29a1f"], [.7, 1, K.green]].forEach(([a, b, col]) => {
+            ctx.strokeStyle = col; ctx.globalAlpha = .3; ctx.beginPath(); ctx.arc(cx, cy, r, Math.PI + a * Math.PI, Math.PI + b * Math.PI - .04); ctx.stroke();
+          });
+          ctx.globalAlpha = 1; const col = v < .4 ? K.red : v < .7 ? "#f29a1f" : K.green;
+          ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(cx, cy, r, Math.PI, Math.PI + v * Math.PI); ctx.stroke();
+          text(n, cx, cy + r * .2, cond(r * .55), K.white, "center");
+          box(cx - r * .6, cy + r * .45, r * 1.2, r * .38, col); text(v < .4 ? "POOR" : v < .7 ? "MEH" : "GOOD", cx, cy + r * .73, cond(r * .3, 700), K.white, "center");
         });
-        ctx.globalAlpha = 1; const col = v < .4 ? K.red : v < .7 ? "#f29a1f" : K.green;
-        ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(cx, cy, r, Math.PI, Math.PI + v * Math.PI); ctx.stroke();
-        text(n, cx, cy + r * .2, cond(r * .55), K.white, "center");
-        box(cx - r * .6, cy + r * .45, r * 1.2, r * .38, col); text(v < .4 ? "POOR" : v < .7 ? "MEH" : "GOOD", cx, cy + r * .73, cond(r * .3, 700), K.white, "center");
+        text("CORE WEB VITALS", W * .5, H * .16, cond(H * .045, 800), K.grey);
+        return;
+      }
+      // Beat 2: mob programming. Four people, one screen, the keyboard rotates,
+      // and the feature ships.
+      const q = (p - .4) / .6, x = W * .46, y = H * .1, w = W * .5, h = H * .46;
+      box(x, y, w, h, "#1b1b1b", "#444");
+      box(x, y, w, H * .05, "#2a2a2a"); text("feature/mvp.tsx", x + 10, y + H * .035, mono(H * .026), K.grey);
+      const code = [
+        ["export function Mvp() {", K.white],
+        ["  const data = useQuery(LIVE_STREAMS);", K.yellow],
+        ["  if (!data) return <Skeleton />;", K.white],
+        ["  return <Grid items={data.streams} />;", K.white],
+        ["}", K.white],
+        ["test('renders streams', ...)  ✓", K.green],
+      ];
+      const typed = span(q, .05, .7) * code.reduce((n, [l]) => n + l.length, 0);
+      let used = 0;
+      code.forEach(([l, col], i) => {
+        const show = Math.max(0, Math.min(l.length, Math.floor(typed - used))); used += l.length;
+        if (show) text(l.slice(0, show), x + 14, y + H * (.1 + i * .055), mono(H * .03), col);
       });
-      // Mob programming: four people, one keyboard, taking turns.
-      const y = H * .66, x = W * .5;
-      text("MOB PROGRAMMING", x, y - H * .03, cond(H * .034, 700), K.grey);
-      const turn = Math.floor(clock / 1.2) % 4;
-      ["A", "B", "C", "D"].forEach((w, i) => { box(x + i * H * .09, y, H * .075, H * .075, i === turn ? K.yellow : K.dim); text(w, x + i * H * .09 + H * .0375, y + H * .053, cond(H * .045), i === turn ? K.bg : K.grey, "center"); });
-      text("← THE DRIVER SWAPS EVERY FEW MINUTES", x + H * .38, y + H * .05, cond(H * .03, 700), K.white);
+      // Who's driving: the keyboard passes round every few seconds.
+      const people = ["A", "B", "C", "D"], driver = Math.floor(q * 8) % 4, size = H * .085;
+      people.forEach((n, i) => {
+        const px = x + i * (size + W * .02), py = y + h + H * .04, on = i === driver;
+        box(px, py, size, size, on ? K.yellow : K.dim); text(n, px + size / 2, py + size * .7, cond(size * .6), on ? K.bg : K.grey, "center");
+        if (on) { box(px, py + size + 4, size, H * .032, K.white); text("DRIVER", px + size / 2, py + size + H * .027, cond(H * .024, 800), K.bg, "center"); }
+      });
+      // Rotation timer.
+      const tx = x + w - H * .06, ty = y + h + H * .085, tr = H * .045, f = (q * 8) % 1;
+      ctx.strokeStyle = K.dim; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(tx, ty, tr, 0, 7); ctx.stroke();
+      ctx.strokeStyle = K.yellow; ctx.beginPath(); ctx.arc(tx, ty, tr, -Math.PI / 2, -Math.PI / 2 + f * Math.PI * 2); ctx.stroke();
+      text("SWAP", tx, ty + H * .012, cond(H * .028, 800), K.white, "center");
+      text("4 PEOPLE · 1 KEYBOARD · ALL REMOTE", x, y + h + H * .19, cond(H * .032, 700), K.white);
     },
-
     criticalpath(p, clock) {
       ground();
       const bw = W * .11, bh = H * .1;
@@ -593,38 +623,53 @@
 
     senior(p, clock) {
       ground();
-      if (p < .48) {
-        // The website rebuild: the old page, with the new one wiping across it.
-        const q = p / .48, x = W * .5, y = H * .1, w = W * .44, h = H * .58, r = rnd(5);
-        box(x, y, w, h, "#1d1d1d");
-        for (let i = 0; i < 14; i++) box(x + 10 + r() * (w - 90), y + 30 + r() * (h - 70), 30 + r() * 70, 10 + r() * 30, "#3a3a3a");
-        const wipe = span(q, .15, .8) * w;
-        ctx.save(); ctx.beginPath(); ctx.rect(x, y, wipe, h); ctx.clip();
-        box(x, y, w, h, "#fafafa");
-        box(x, y, w, h * .09, K.bg); text("dailymotion", x + 12, y + h * .065, cond(h * .06, 800), K.white);
-        box(x + w * .04, y + h * .14, w * .58, h * .44, K.bg);
-        ctx.fillStyle = K.yellow; ctx.beginPath(); ctx.moveTo(x + w * .3, y + h * .3); ctx.lineTo(x + w * .37, y + h * .36); ctx.lineTo(x + w * .3, y + h * .42); ctx.fill();
-        for (let i = 0; i < 3; i++) box(x + w * .66, y + h * (.14 + i * .155), w * .3, h * .13, "#d9d9d9");
-        for (let i = 0; i < 4; i++) box(x + w * (.04 + i * .235), y + h * .63, w * .21, h * .2, "#e5e5e5");
-        ctx.restore();
-        if (wipe > 0 && wipe < w) box(x + wipe - 3, y, 6, h, K.yellow);
-        [["FRONTEND", span(q, .25, .65)], ["BACKEND", span(q, .45, .9)]].forEach(([l, v], i) => {
+      if (p < .56) {
+        // Left: the rebuild progress, which stays up through both beats.
+        const q1 = clamp(p / .3);
+        [["FRONTEND", span(q1, .25, .65)], ["BACKEND", span(q1, .45, .9)]].forEach(([l, v], i) => {
           const bx = W * .04, by = H * .42 + i * H * .08;
           text(l, bx, by + H * .045, cond(H * .045, 700), K.white); box(bx + W * .11, by + H * .012, W * .2, H * .04, K.dim); box(bx + W * .11, by + H * .012, W * .2 * v, H * .04, v >= 1 ? K.green : K.yellow);
           if (v >= 1) text("REBUILT", bx + W * .32, by + H * .045, cond(H * .04, 800), K.green);
         });
-        // Backend latency at P75, counting down once the backend bar is done.
-        const ms = span(q, .9, 1);
-        if (ms > 0) {
-          ctx.globalAlpha = ms;
-          text(`${Math.round(lerp(600, 60, ms))} MS`, W * .04, H * .7, cond(H * .12), K.yellow);
-          text("BACKEND P75, DOWN FROM 600", W * .04, H * .755, cond(H * .036, 700), K.white);
-          ctx.globalAlpha = 1;
+        if (p < .3) {
+          // Beat 1: the old page, with the new one wiping across it.
+          const x = W * .5, y = H * .1, w = W * .44, h = H * .58, r = rnd(5);
+          box(x, y, w, h, "#1d1d1d");
+          for (let i = 0; i < 14; i++) box(x + 10 + r() * (w - 90), y + 30 + r() * (h - 70), 30 + r() * 70, 10 + r() * 30, "#3a3a3a");
+          const wipe = span(q1, .15, .8) * w;
+          ctx.save(); ctx.beginPath(); ctx.rect(x, y, wipe, h); ctx.clip();
+          box(x, y, w, h, "#fafafa");
+          box(x, y, w, h * .09, K.bg); text("dailymotion", x + 12, y + h * .065, cond(h * .06, 800), K.white);
+          box(x + w * .04, y + h * .14, w * .58, h * .44, K.bg);
+          ctx.fillStyle = K.yellow; ctx.beginPath(); ctx.moveTo(x + w * .3, y + h * .3); ctx.lineTo(x + w * .37, y + h * .36); ctx.lineTo(x + w * .3, y + h * .42); ctx.fill();
+          for (let i = 0; i < 3; i++) box(x + w * .66, y + h * (.14 + i * .155), w * .3, h * .13, "#d9d9d9");
+          for (let i = 0; i < 4; i++) box(x + w * (.04 + i * .235), y + h * .63, w * .21, h * .2, "#e5e5e5");
+          ctx.restore();
+          if (wipe > 0 && wipe < w) box(x + wipe - 3, y, 6, h, K.yellow);
+          return;
         }
+        // Beat 2: backend response time at P75, 600 ms down to 60 ms.
+        const q2 = (p - .3) / .26, x = W * .44, w = W * .52, drop = span(q2, .25, .7), ms = Math.round(lerp(600, 60, drop));
+        const slide = span(q2, 0, .15);
+        ctx.globalAlpha = slide;
+        box(x, H * .07, w, H * .065, K.yellow); text("BACKEND RESPONSE TIME · P75", x + 12, H * .118, cond(H * .045, 800), K.bg);
+        text(String(ms), x + w, H * .44, cond(H * .3), drop >= 1 ? K.green : K.yellow, "right");
+        text("MS", x + w, H * .5, cond(H * .055, 800), K.white, "right");
+        const bw = w * .58, bx = x, by = H * .22;
+        text("BEFORE", bx, by + H * .045, cond(H * .04, 700), K.grey); box(bx, by + H * .06, bw, H * .06, K.red); text("600 MS", bx + 10, by + H * .105, cond(H * .045, 800), K.white);
+        text("AFTER", bx, by + H * .2, cond(H * .04, 700), K.grey); box(bx, by + H * .215, Math.max(bw * ms / 600, 4), H * .06, drop >= 1 ? K.green : K.yellow);
+        text(`${ms} MS`, bx + Math.max(bw * ms / 600, 4) + 10, by + H * .26, cond(H * .045, 800), K.white);
+        const stamp = span(q2, .72, .82);
+        if (stamp > 0) {
+          ctx.globalAlpha = stamp; ctx.save(); ctx.translate(x + w * .3, H * .66); ctx.rotate(-.06);
+          box(-W * .13 * stamp, -H * .05, W * .26 * stamp, H * .1, K.green); text("10× FASTER", 0, H * .032, cond(H * .07), K.white, "center");
+          ctx.restore();
+        }
+        ctx.globalAlpha = 1;
         return;
       }
       // The new team on a pitch: everyone passing, nobody playing alone.
-      const q = (p - .48) / .52, x = W * .47, y = H * .08, w = W * .5, h = H * .6;
+      const q = (p - .56) / .44, x = W * .47, y = H * .08, w = W * .5, h = H * .6;
       box(x, y, w, h, K.pitch);
       for (let i = 1; i < 6; i += 2) box(x + i * w / 6, y, w / 6, h, K.pitch2);
       ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = 2;
@@ -666,6 +711,16 @@
     },
   };
 
+  // The thread through every chapter: what got delivered.
+  function delivered(label, a) {
+    const x = W * .04, y = H * .67, h = H * .068, tag = W * .13;
+    ctx.save(); ctx.beginPath(); ctx.rect(x, y, (tag + W * .34) * a, h); ctx.clip();
+    box(x, y, tag, h, K.green); text("✓ DELIVERED", x + tag / 2, y + h * .72, cond(h * .6, 800), K.white, "center");
+    ctx.font = cond(h * .55, 700); const tw = ctx.measureText(label.toUpperCase()).width;
+    box(x + tag, y, tw + W * .03, h, K.white); text(label.toUpperCase(), x + tag + W * .015, y + h * .7, cond(h * .55, 700), K.bg);
+    ctx.restore();
+  }
+
   // ------------------------------------------------------------ playback
   const chapterAt = t => { for (let i = CHAPTERS.length - 1; i >= 0; i--) if (t >= CHAPTERS[i].t0) return i; return 0; };
   const monthAt = t => { const c = CHAPTERS[chapterAt(t)]; return Math.floor(lerp(c.a, c.b - 1, clamp((t - c.t0) / c.sec))); };
@@ -682,7 +737,8 @@
     CHAPTERS.forEach((x, j) => x.job.classList.toggle("now", j === i));
   }
   function setLine(c, p) {
-    const li = Math.min(c.lines.length - 1, Math.floor(clamp(p) * c.lines.length));
+    // Lines are spread evenly, unless the chapter times them to its beats.
+    const li = c.cues ? Math.max(0, c.cues.findLastIndex(x => p >= x)) : Math.min(c.lines.length - 1, Math.floor(clamp(p) * c.lines.length));
     if (li === state.line) return;
     state.line = li;
     $("captions").innerHTML = state.captions ? `<span>${state.quality === "240" ? c.title : c.lines[li].trim()}</span>` : "";
@@ -709,6 +765,7 @@
       const t = Math.min(state.t, PLAYTIME - .001), i = chapterAt(t), c = CHAPTERS[i], p = (t - c.t0) / c.sec;
       setChapter(i); if (state.t < PLAYTIME) setLine(c, p);
       SCENES[c.scene](p, clock);
+      if (c.ship && p >= c.ship[0] && p < (c.ship[2] ?? 1)) delivered(c.ship[1], span(p, c.ship[0], c.ship[0] + .06));
       const into = clamp(p * c.sec / .35);
       if (into < 1) { ctx.fillStyle = `rgba(18,18,18,${1 - into})`; ctx.fillRect(0, 0, W, H); }
     }
